@@ -1,0 +1,31 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+        <img class="logo" src="../../../assets/imagen/login.png" alt="imagen">
+        <h1>Login</h1>
+        <form (ngSubmit)="login()" [formGroup]="loginUsuario">
+            <div class="form-floating mb-3">
+                <input type="email" formControlName="email" class="form-control"placeholder="name@example.com">
+                <label>Email</label>
+                <span *ngIf="loginUsuario.get('email')?.hasError('required') && loginUsuario.get('email')?.touched" class="text-danger errolabel">
+                  El <strong>Correo</strong> es requerido
+                </span>
+                <span *ngIf="loginUsuario.get('email')?.hasError('email') && loginUsuario.get('email')?.touched" class="text-danger errolabel">
+                  El <strong>Correo</strong> es ivalido
+                </span>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                <label>Password</label>
+                <span *ngIf="loginUsuario.get('password')?.hasError('required') && loginUsuario.get('password')?.touched" class="text-danger errolabel">
+                  El <strong>Password</strong> es requerido
+                </span>
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="loginUsuario.invalid">Ingresar</button>
+              </div>
+              <p class="mb-3">no tienes cuenta? <a routerLink="/registrar-usuario">Registrar</a></p>
+              <a class="mb-3" routerLink="/recuperar-password">Recuperar contraseña</a>
+        </form>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>
